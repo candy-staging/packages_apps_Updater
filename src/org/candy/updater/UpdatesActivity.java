@@ -149,9 +149,17 @@ public class UpdatesActivity extends UpdatesListActivity {
         TextView headerTitle = (TextView) findViewById(R.id.header_title);
         headerTitle.setText(getString(R.string.header_text));
 
-        TextView headerVersion = (TextView) findViewById(R.id.header_build_version);
-        headerVersion.setText(SystemProperties.get(Constants.PROP_BUILD_VERSION) + " ● " +
+        TextView headerBuildVersion = (TextView) findViewById(R.id.header_build_version);
+        headerBuildVersion.setText(SystemProperties.get(Constants.PROP_BUILD_VERSION) + " ● " +
                     SystemProperties.get(Constants.PROP_DEVICE));
+
+        TextView headerDeviceName = (TextView) findViewById(R.id.header_device_name);
+        headerDeviceName.setText(
+                getString(R.string.list_device_name, BuildInfoUtils.getDevice()));
+
+        TextView headerBuildDate = (TextView) findViewById(R.id.header_build_date);
+        headerBuildDate.setText(StringGenerator.getDateLocalizedUTC(this,
+                DateFormat.LONG, BuildInfoUtils.getBuildDateTimestamp()));
 
         // Switch between header title and appbar title minimizing overlaps
         final CollapsingToolbarLayout collapsingToolbar =
