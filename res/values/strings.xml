@@ -159,4 +159,7 @@
     <string name="update_failed_channel_title">Update failed</string>
 
     <string name="changelog_fail">Failed to retrieve changelog or changelog unavailable</string>
+
+    <!-- Maintainer-->
+    <string name="maintainer_name">Maintainer: <xliff:g id="maintainer" example="Maintainer Name">%1$s</xliff:g></string>
 </resources>
