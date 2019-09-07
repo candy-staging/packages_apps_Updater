@@ -19,8 +19,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.os.SystemProperties;
-import androidx.preference.PreferenceManager;
 import android.util.Log;
+import androidx.preference.PreferenceManager;
 
 import org.candy.updater.R;
 import org.candy.updater.misc.Constants;

@@ -20,8 +20,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.PowerManager;
 import android.os.SystemClock;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.candy.updater.UpdatesDbHelper;
 import org.candy.updater.download.DownloadClient;

@@ -111,4 +111,6 @@
 	android:clickable="true"
         app:backgroundTint="@color/fab_bgtint" />
 
+=======
+>>>>>>> 0a5917d... Updater: Move to AndroidX
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

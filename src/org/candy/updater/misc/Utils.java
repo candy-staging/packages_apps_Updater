@@ -34,6 +34,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.candy.updater.R;
 import org.candy.updater.UpdatesDbHelper;
 import org.candy.updater.controller.UpdaterService;

@@ -25,10 +25,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import androidx.core.app.NotificationCompat;
 import android.util.Log;
+import androidx.core.app.NotificationCompat;
 
 import org.json.JSONException;
+
 import org.candy.updater.download.DownloadClient;
 import org.candy.updater.misc.Constants;
 import org.candy.updater.misc.Utils;
@@ -36,9 +37,7 @@ import org.candy.updater.model.UpdateInfo;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 public class UpdatesCheckReceiver extends BroadcastReceiver {
