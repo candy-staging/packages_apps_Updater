@@ -164,11 +164,11 @@ public class Utils {
         String device = SystemProperties.get(Constants.PROP_NEXT_DEVICE,
                 SystemProperties.get(Constants.PROP_DEVICE));
 
-	String changelogversion = SystemProperties.get(Constants.PROP_VERSION);
-	String changelogURL = context.getString(R.string.menu_changelog_url);
+	    String changelogversion = SystemProperties.get(Constants.PROP_VERSION);
+	    String changelogURL = context.getString(R.string.menu_changelog_url);
 
-	return changelogURL.replace("{device}", device) 
-	       .replace ("{version}", changelogversion);
+	    return changelogURL.replace("{device}", device)
+	           .replace ("{version}", changelogversion);
     }
 
     public static void triggerUpdate(Context context, String downloadId) {

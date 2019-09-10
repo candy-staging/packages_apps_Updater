@@ -267,10 +267,12 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
 
         String buildDate = StringGenerator.getDateLocalizedUTC(mActivity,
                 DateFormat.LONG, update.getTimestamp());
+        String buildDateTime = StringGenerator.getDateTimeLocalizedUTC(mActivity,
+                update.getTimestamp());
         String buildVersion = mActivity.getString(R.string.list_build_version,
                 update.getVersion());
         if(update.getVersion().isEmpty()) buildVersion = update.getName();
-        viewHolder.mBuildDate.setText(buildDate);
+        viewHolder.mBuildDate.setText(buildDateTime);
         viewHolder.mBuildVersion.setText(buildVersion);
         viewHolder.mBuildVersion.setCompoundDrawables(null, null, null, null);
 
@@ -486,8 +488,10 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
 
         String buildDate = StringGenerator.getDateLocalizedUTC(mActivity,
                 DateFormat.MEDIUM, update.getTimestamp());
+        String buildDateTime = StringGenerator.getDateTimeLocalizedUTC(mActivity,
+                update.getTimestamp());
         String buildInfoText = mActivity.getString(R.string.list_build_version_date,
-                BuildInfoUtils.getBuildVersion(), buildDate);
+                BuildInfoUtils.getBuildVersion(), buildDateTime);
         return new AlertDialog.Builder(mActivity)
                 .setTitle(R.string.apply_update_dialog_title)
                 .setMessage(mActivity.getString(resId, buildInfoText,

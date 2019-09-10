@@ -63,6 +63,15 @@ public final class StringGenerator {
         return f.format(date);
     }
 
+    public static String getDateTimeLocalizedUTC(Context context, long unixTimestamp) {
+        DateFormat f = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT,
+                getCurrentLocale(context));
+        f.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date(unixTimestamp * 1000);
+        return f.format(date);
+    }
+
+
     public static String bytesToMegabytes(Context context, long bytes) {
         return String.format(getCurrentLocale(context), "%.0f", bytes / 1024.f / 1024.f);
     }
