@@ -37,6 +37,7 @@ import org.candy.updater.R;
 import org.candy.updater.UpdaterReceiver;
 import org.candy.updater.UpdatesActivity;
 import org.candy.updater.misc.BuildInfoUtils;
+import org.candy.updater.misc.Constants;
 import org.candy.updater.misc.StringGenerator;
 import org.candy.updater.misc.Utils;
 import org.candy.updater.model.UpdateInfo;

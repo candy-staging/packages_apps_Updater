@@ -3,12 +3,13 @@
 updates_dir=/data/candy_updates
 
 if [ ! -f "$1" ]; then
-   echo "Usage: $0 ZIP [UNVERIFIED]"
-   echo "Push ZIP to $updates_dir and add it to Updater"
-   echo
-   echo "The name of ZIP is assumed to have lineage-VERSION-DATE-TYPE-* as format"
-   echo "If UNVERIFIED is set, the app will verify the update"
-   exit
+    echo "Usage: $0 ZIP [UNVERIFIED]"
+    echo "Push ZIP to $updates_dir and add it to Updater"
+    echo
+    echo "The name of ZIP should have this format: Candy-BUILD-VERSION-version-TYPE-DATE-TIME"
+    echo
+    echo "If UNVERIFIED is set, the app will verify the update"
+    exit
 fi
 zip_path=`realpath "$1"`
 
@@ -33,12 +34,15 @@ else
     status=2
 fi
 
-# Assume lineage-VERSION-DATE-TYPE-*.zip
+# Candy-BUILD-VERSION-version-TYPE-DATE-TIME-*.zip
+#   f1    f2    f3      f4     f5   f6   f7
+# Candy-fajita-10-Stable-OFFICIAL-20200507-1158.zip
+#
 zip_name=`basename "$zip_path"`
 id=`echo "$zip_name" | sha1sum | cut -d' ' -f1`
-version=`echo "$zip_name" | cut -d'-' -f3`
-type=`echo "$zip_name" | cut -d'-' -f2`
-build_date=`echo "$zip_name" | cut -d'-' -f5 | cut -d'_' -f1`
+version=`echo "$zip_name" | cut -d'-' -f3`| cut -d'-' -f4
+type=`echo "$zip_name" | cut -d'-' -f5`
+build_date=`echo "$zip_name" | cut -d'-' -f5 | cut -d'-' -f4`
 timestamp=`date --date="$build_date 23:59:59" +%s`
 size=`stat -c "%s" "$zip_path"`
 
