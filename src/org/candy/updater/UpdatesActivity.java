@@ -146,17 +146,16 @@ public class UpdatesActivity extends UpdatesListActivity {
         headerBuildVersion.setText(SystemProperties.get(Constants.PROP_BUILD_VERSION) + " ● " +
                     SystemProperties.get(Constants.PROP_DEVICE));
 
-        TextView headerDeviceName = (TextView) findViewById(R.id.header_device_name);
+        /*TextView headerDeviceName = (TextView) findViewById(R.id.header_device_name);
         headerDeviceName.setText(
-                getString(R.string.list_device_name, BuildInfoUtils.getDevice()));
+                getString(R.string.list_device_name, BuildInfoUtils.getDevice()));*/
 
         TextView headerBuildDate = (TextView) findViewById(R.id.header_build_date);
-        headerBuildDate.setText(StringGenerator.getDateLocalizedUTC(this,
+        headerBuildDate.setText("Build date: " + StringGenerator.getDateTimeLocalizedUTC(this,
                 DateFormat.LONG, BuildInfoUtils.getBuildDateTimestamp()));
 
         TextView MaintainerName = (TextView) findViewById(R.id.maintainer_name);
-        MaintainerName.setText(
-                getString(R.string.maintainer_name, BuildInfoUtils.getMaintainer()));
+        MaintainerName.setText("DM: " + getString(R.string.maintainer_name, BuildInfoUtils.getMaintainer()));
 
         // Switch between header title and appbar title minimizing overlaps
         final CollapsingToolbarLayout collapsingToolbar =
@@ -411,6 +410,17 @@ public class UpdatesActivity extends UpdatesListActivity {
                 showSnackbar(R.string.snack_download_verified, Snackbar.LENGTH_LONG);
                 break;
         }
+    }
+
+    private void updateLastCheckedString() {
+        final SharedPreferences preferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        long lastCheck = preferences.getLong(Constants.PREF_LAST_UPDATE_CHECK, -1) / 1000;
+        String lastCheckString = getString(R.string.header_last_updates_check,
+                StringGenerator.getDateLocalized(this, DateFormat.LONG, lastCheck),
+                StringGenerator.getTimeLocalized(this, lastCheck));
+        TextView headerLastCheck = (TextView) findViewById(R.id.header_last_check);
+        headerLastCheck.setText("Last update check: " + lastCheckString);
     }
 
     @Override

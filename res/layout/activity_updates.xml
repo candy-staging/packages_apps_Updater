@@ -56,24 +56,13 @@
                     android:textSize="32sp" />
 
                 <TextView
-                    android:id="@+id/header_device_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingBottom="24dp"
-                    android:alpha="0.75"
-                    android:letterSpacing="0.08"
-                    android:layout_below="@id/header_title"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
-
-                <TextView
                     android:id="@+id/header_build_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/header_device_name"
+                    android:gravity="center"
+                    android:layout_below="@id/header_title"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/header_build_date"
@@ -81,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/header_build_version"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/maintainer_name"
@@ -89,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/header_build_date"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/header_last_check"
