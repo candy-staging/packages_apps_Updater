@@ -99,13 +99,6 @@ public class UpdatesActivity extends UpdatesListActivity {
 
     private static final int READ_REQUEST_CODE = 42;
 
-    // Storage Permissions
-    private static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0;
-    private static final String[] REQUIRED_STORAGE_PERMISSIONS = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -253,12 +246,7 @@ public class UpdatesActivity extends UpdatesListActivity {
                 return true;
             }
             case R.id.menu_local_update: {
-                boolean hasPermission = PermissionsUtils.checkAndRequestPermissions(
-                      this, REQUIRED_STORAGE_PERMISSIONS,
-                      STORAGE_PERMISSIONS_REQUEST_CODE);
-                if (hasPermission) {
-                  performFileSearch();
-                }
+                performFileSearch();
                 return true;
             }
         }
@@ -537,12 +525,12 @@ public class UpdatesActivity extends UpdatesListActivity {
             updatesOnline.add(0, update.getDownloadId());
         }
 
-         controller.setUpdatesAvailableOnline(updatesOnline, false);
+        controller.setUpdatesAvailableOnline(updatesOnline, false);
 
-         controller.verifyUpdateAsync(localUpdate.getDownloadId());
+        controller.verifyUpdateAsync(localUpdate.getDownloadId());
         controller.notifyUpdateChange(localUpdate.getDownloadId());
 
-         List<String> updateIds = new ArrayList<>();
+        List<String> updateIds = new ArrayList<>();
         List<UpdateInfo> sortedUpdates = controller.getUpdates();
         if (sortedUpdates.isEmpty()) {
             findViewById(R.id.no_new_updates_view).setVisibility(View.VISIBLE);
