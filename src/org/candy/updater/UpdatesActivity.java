@@ -151,11 +151,13 @@ public class UpdatesActivity extends UpdatesListActivity {
                 getString(R.string.list_device_name, BuildInfoUtils.getDevice()));*/
 
         TextView headerBuildDate = (TextView) findViewById(R.id.header_build_date);
-        headerBuildDate.setText("Build date: " + StringGenerator.getDateLocalizedUTC(this,
-                DateFormat.LONG, BuildInfoUtils.getBuildDateTimestamp()));
+        headerBuildDate.setText("Build date: " + StringGenerator.getDateTimeLocalizedUTC(this,
+                BuildInfoUtils.getBuildDateTimestamp()));
 
         TextView MaintainerName = (TextView) findViewById(R.id.maintainer_name);
-        MaintainerName.setText("DM: " + getString(R.string.maintainer_name, BuildInfoUtils.getMaintainer()));
+        MaintainerName.setText("Maintainer: " + getString(R.string.maintainer_name, BuildInfoUtils.getMaintainer()));
+
+
 
         // Switch between header title and appbar title minimizing overlaps
         final CollapsingToolbarLayout collapsingToolbar =
@@ -334,6 +336,7 @@ public class UpdatesActivity extends UpdatesListActivity {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             long millis = System.currentTimeMillis();
             preferences.edit().putLong(Constants.PREF_LAST_UPDATE_CHECK, millis).apply();
+            updateLastCheckedString();
             if (json.exists() && Utils.isUpdateCheckEnabled(this) &&
                     Utils.checkForNewUpdates(json, jsonNew)) {
                 UpdatesCheckReceiver.updateRepeatingUpdatesCheck(this);
@@ -420,7 +423,7 @@ public class UpdatesActivity extends UpdatesListActivity {
                 StringGenerator.getDateLocalized(this, DateFormat.LONG, lastCheck),
                 StringGenerator.getTimeLocalized(this, lastCheck));
         TextView headerLastCheck = (TextView) findViewById(R.id.header_last_check);
-        headerLastCheck.setText("Last update check: " + lastCheckString);
+        headerLastCheck.setText(lastCheckString);
     }
 
     @Override

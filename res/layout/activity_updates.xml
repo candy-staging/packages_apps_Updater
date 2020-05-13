@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:fontFamily="@*android:string/config_headlineFontFamily"
-                    android:paddingBottom="16dp"
+                    android:paddingBottom="10dp"
                     android:alpha="0.9"
                     android:letterSpacing="0.08"
                     android:layout_below="@id/ic_header"
@@ -57,7 +57,7 @@
 
                 <TextView
                     android:id="@+id/header_build_version"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_below="@id/header_title"
@@ -66,30 +66,30 @@
 
                 <TextView
                     android:id="@+id/header_build_date"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_below="@id/header_build_version"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/maintainer_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_below="@id/header_build_date"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/header_last_check"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_below="@id/maintainer_name"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -132,7 +132,8 @@
         android:layout_gravity="center|bottom"
         android:src="@drawable/ic_menu_refresh"
         android:layout_margin="16dp"
-	android:clickable="true"
+	    android:clickable="true"
         app:backgroundTint="@color/fab_bgtint" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

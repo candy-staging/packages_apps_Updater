@@ -93,7 +93,7 @@
     <string name="snack_update_not_installable">This update can\'t be installed on top of the current build.</string>
 
     <string name="header_text">CandyRoms</string>
-    <string name="header_last_updates_check">Last checked: <xliff:g id="date" example="1 January 1970">%1$s</xliff:g> (<xliff:g id="time" example="01:23">%2$s</xliff:g>)</string>
+    <string name="header_last_updates_check">Last update check: <xliff:g id="date" example="1 January 1970">%1$s</xliff:g> (<xliff:g id="time" example="01:23">%2$s</xliff:g>)</string>
 
     <string name="list_build_version">CandyRoms <xliff:g id="version" example="c10">%1$s</xliff:g></string>
     <string name="list_build_version_date">CandyRoms <xliff:g id="version" example="c10">%1$s</xliff:g> - <xliff:g id="date" example="May 11, 2020">%2$s</xliff:g></string>
@@ -162,5 +162,5 @@
     <string name="changelog_fail">Failed to retrieve changelog or changelog unavailable</string>
 
     <!-- Maintainer-->
-    <string name="maintainer_name">Maintainer: <xliff:g id="maintainer" example="Maintainer Name">%1$s</xliff:g></string>
+    <string name="maintainer_name">Maintainer<xliff:g id="maintainer" example="Maintainer Name">%1$s</xliff:g></string>
 </resources>
