@@ -4,7 +4,8 @@
     <color name="theme_primary_dark">#fafafa</color>
     <color name="theme_accent">#ff4a4a</color>
     <color name="inverted">#f5f5f5</color>
-    <color name="update_background">#212121</color>
+    <color name="cardview_background">#fafafa</color>
+    <color name="update_background">#f5f5f5</color>
     <color name="ic_background">#333333</color>
     <color name="fab_bgtint">#e0e0e0</color>
 </resources>
