@@ -29,7 +29,7 @@ LOCAL_REQUIRED_MODULES := privapp_whitelist_org.candy.updater.xml
 include $(BUILD_PACKAGE)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := privapp_whitelist_org.lineageos.updater.xml
+LOCAL_MODULE := privapp_whitelist_org.candy.updater.xml
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
