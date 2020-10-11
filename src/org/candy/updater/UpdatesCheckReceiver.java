@@ -33,7 +33,6 @@ import org.json.JSONException;
 import org.candy.updater.download.DownloadClient;
 import org.candy.updater.misc.Constants;
 import org.candy.updater.misc.Utils;
-import org.candy.updater.model.UpdateInfo;
 
 import java.io.File;
 import java.io.IOException;
