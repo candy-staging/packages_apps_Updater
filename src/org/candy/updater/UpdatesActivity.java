@@ -17,6 +17,7 @@ package org.candy.updater;
 
 import android.Manifest;
 import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -77,7 +78,10 @@ import org.candy.updater.model.UpdateInfo;
 import org.candy.updater.model.UpdateStatus;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -86,6 +90,7 @@ import java.util.UUID;
 public class UpdatesActivity extends UpdatesListActivity {
 
     private static final String TAG = "UpdatesActivity";
+    private static final int ACTIVITY_CHOOSE_FILE = 9999;
     private UpdaterService mUpdaterService;
     private BroadcastReceiver mBroadcastReceiver;
 
@@ -234,6 +239,7 @@ public class UpdatesActivity extends UpdatesListActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -252,7 +258,7 @@ public class UpdatesActivity extends UpdatesListActivity {
                 return true;
             }
             case R.id.menu_local_update: {
-                performFileSearch();
+                showLocalUpdateDialog();
                 return true;
             }
         }
@@ -535,23 +541,15 @@ public class UpdatesActivity extends UpdatesListActivity {
                 })
                 .show();
     }
-    private void performFileSearch() {
-        Intent chooseFile = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        chooseFile.setType("application/zip");
-        Intent intent = Intent.createChooser(chooseFile, "Choose a file");
-        startActivityForResult(intent, READ_REQUEST_CODE);
-    }
 
-     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-        if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Uri uri = null;
-            if (resultData != null) {
-                uri = resultData.getData();
-                addLocalUpdateInfo(uri);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, resultData);
+    private void showLocalUpdateDialog() {
+        Intent chooseFile;
+        Intent intent;
+        chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+        chooseFile.addCategory(Intent.CATEGORY_OPENABLE);
+        chooseFile.setType("*/*");
+        intent = Intent.createChooser(chooseFile, "Choose a file");
+        startActivityForResult(intent, ACTIVITY_CHOOSE_FILE);
     }
 
     private void addLocalUpdateInfo(Uri uri) {
@@ -598,6 +596,60 @@ public class UpdatesActivity extends UpdatesListActivity {
             }
             mAdapter.setData(updateIds);
             mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == ACTIVITY_CHOOSE_FILE) {
+            Uri uri = data.getData();
+            Utils.cleanupDownloadsDir(this);
+            File downloadPath = new File(Utils.getDownloadPath(this), "update.zip");
+            boolean fileCopySuccess = false;
+            try {
+                copy(uri, downloadPath);
+                fileCopySuccess = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (fileCopySuccess) {
+                UpdateInfo update = Utils.updateInfoFromFileForced(downloadPath);
+                mUpdaterService.getUpdaterController().addUpdate(update);
+                mUpdaterService.getUpdaterController().onUpdateDownloaded(update.getDownloadId());
+            }
+        }
+    }
+
+    private void startInstallIfLocalUpdate(String downloadId) {
+        UpdateInfo update = UpdaterController.getInstance().getUpdate(downloadId);
+        if (update.getType().equals("local_update")) {
+            final boolean canInstall = Utils.canInstall(update);
+            if (canInstall) {
+                Utils.getInstallDialog(update.getDownloadId(), this).show();
+            } else {
+                showSnackbar(R.string.snack_update_not_installable,
+                        Snackbar.LENGTH_LONG);
+            }
+        }
+    }
+
+    private void copy(Uri src, File dst) throws IOException {
+        InputStream in = this.getContentResolver().openInputStream(src);
+        try {
+            OutputStream out = new FileOutputStream(dst);
+            try {
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            } finally {
+                out.close();
+            }
+        } finally {
+            in.close();
         }
     }
 }

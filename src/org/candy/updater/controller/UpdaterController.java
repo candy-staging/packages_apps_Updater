@@ -15,6 +15,7 @@
  */
 package org.candy.updater.controller;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -75,6 +76,7 @@ public class UpdaterController {
         return sUpdaterController;
     }
 
+    @SuppressLint("InvalidWakeLockTag")
     private UpdaterController(Context context) {
         mBroadcastManager = LocalBroadcastManager.getInstance(context);
         mUpdatesDbHelper = new UpdatesDbHelper(context);
@@ -185,12 +187,7 @@ public class UpdaterController {
             @Override
             public void onSuccess(File destination) {
                 Log.d(TAG, "Download complete");
-                Update update = mDownloads.get(downloadId).mUpdate;
-                update.setStatus(UpdateStatus.VERIFYING);
-                removeDownloadClient(mDownloads.get(downloadId));
-                verifyUpdateAsync(downloadId);
-                notifyUpdateChange(downloadId);
-                tryReleaseWakelock();
+                onUpdateDownloaded(downloadId);
             }
 
             @Override
@@ -208,6 +205,15 @@ public class UpdaterController {
                 tryReleaseWakelock();
             }
         };
+    }
+
+    public void onUpdateDownloaded(String downloadId) {
+        Update update = mDownloads.get(downloadId).mUpdate;
+        update.setStatus(UpdateStatus.VERIFYING);
+        removeDownloadClient(mDownloads.get(downloadId));
+        verifyUpdateAsync(downloadId);
+        notifyUpdateChange(downloadId);
+        tryReleaseWakelock();
     }
 
     private DownloadClient.ProgressListener getProgressListener(final String downloadId) {
