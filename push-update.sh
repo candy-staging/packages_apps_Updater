@@ -34,15 +34,16 @@ else
     status=2
 fi
 
-# Candy-BUILD-VERSION-version-TYPE-DATE-TIME-*.zip
-#   f1    f2    f3      f4     f5   f6   f7
-# Candy-fajita-10-Stable-OFFICIAL-20200507-1158.zip
+
+# Candy-BUILD-VERSION-TYPE-DATE-TIME.zip
+# Candy-sunfish-11.0-OFFICIAL-20200507-1158.zip
+#  f1    f2      f3    f4        f5     f6
 #
 zip_name=`basename "$zip_path"`
 id=`echo "$zip_name" | sha1sum | cut -d' ' -f1`
-version=`echo "$zip_name" | cut -d'-' -f3`| cut -d'-' -f4
-type=`echo "$zip_name" | cut -d'-' -f5`
-build_date=`echo "$zip_name" | cut -d'-' -f5 | cut -d'-' -f4`
+version=`echo "$zip_name" | cut -d'-' -f3`
+type=`echo "$zip_name" | cut -d'-' -f4`
+build_date=`echo "$zip_name" | cut -d'-' -f5`
 timestamp=`date --date="$build_date 23:59:59" +%s`
 size=`stat -c "%s" "$zip_path"`
 
