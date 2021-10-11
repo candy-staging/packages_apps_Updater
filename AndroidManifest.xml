@@ -30,6 +30,7 @@
             android:excludeFromRecents="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/display_name"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
             android:permission="android.permission.READ_EXTERNAL_STORAGE">
@@ -56,7 +57,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".UpdatesCheckReceiver">
+        <receiver android:name=".UpdatesCheckReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
