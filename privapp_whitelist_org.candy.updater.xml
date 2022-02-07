@@ -17,7 +17,7 @@
 <permissions>
     <privapp-permissions package="org.candy.updater">
         <permission name="android.permission.ACCESS_CACHE_FILESYSTEM"/>
-        <permission name="android.permission.READ_EXTERNAL_STORAGE" />
+        <permission name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
         <permission name="android.permission.REBOOT"/>
         <permission name="android.permission.RECOVERY"/>
         <permission name="android.permission.WRITE_EXTERNAL_STORAGE" />
